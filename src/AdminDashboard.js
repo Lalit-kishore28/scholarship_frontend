@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from './config';
 
 function AdminDashboard() {
   const [scholarships, setScholarships] = useState([]);
@@ -15,7 +16,7 @@ function AdminDashboard() {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5001/api/scholarships', {
+      const response = await axios.get(`${API_URL}/api/scholarships`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setScholarships(response.data);
@@ -30,7 +31,7 @@ function AdminDashboard() {
     if (window.confirm('Are you sure you want to delete this scholarship?')) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:5001/api/scholarships/${id}`, {
+        await axios.delete(`${API_URL}/api/scholarships/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setScholarships(scholarships.filter((s) => s._id !== id));

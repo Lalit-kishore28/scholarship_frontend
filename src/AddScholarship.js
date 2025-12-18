@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from './config';
 
 function AddScholarship() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ function AddScholarship() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5001/api/scholarships', formData, {
+      await axios.post(`${API_URL}/api/scholarships`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate('/admin');

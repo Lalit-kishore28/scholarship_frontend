@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from './config';
 
 function EditScholarship() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function EditScholarship() {
   const fetchScholarship = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://localhost:5001/api/scholarships/${id}`, {
+      const response = await axios.get(`${API_URL}/api/scholarships/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = response.data;
@@ -51,7 +52,7 @@ function EditScholarship() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:5001/api/scholarships/${id}`, formData, {
+      await axios.put(`${API_URL}/api/scholarships/${id}`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate('/admin');

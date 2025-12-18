@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useFavorites } from './FavoritesContext';
+import API_URL from './config';
 
 function ScholarshipFinder() {
   const [scholarships, setScholarships] = useState([]);
@@ -19,7 +20,7 @@ function ScholarshipFinder() {
   const fetchScholarships = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5001/api/scholarships');
+      const response = await axios.get(`${API_URL}/api/scholarships`);
       setScholarships(response.data);
       setFilteredScholarships(response.data);
     } catch (err) {

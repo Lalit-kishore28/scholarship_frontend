@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from './config';
 
 function ScholarshipDetails() {
   const { id } = useParams();
@@ -12,7 +13,7 @@ function ScholarshipDetails() {
   const fetchScholarshipDetails = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5001/api/scholarships/${id}`);
+      const response = await axios.get(`${API_URL}/api/scholarships/${id}`);
       setScholarship(response.data);
     } catch (err) {
       setError('Failed to fetch scholarship details');
