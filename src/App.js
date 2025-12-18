@@ -43,11 +43,11 @@ function App() {
         <div className="min-h-screen bg-gray-100">
           <Navbar isAuthenticated={isAuthenticated} user={user} onLogout={handleLogout} />
           <Routes>
-            <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setUser={setUser} />} />
+            <Route path="/login" element={isAuthenticated ? <Navigate to="/" /> : <Login setIsAuthenticated={setIsAuthenticated} setUser={setUser} />} />
             <Route path="/signup" element={<Signup setIsAuthenticated={setIsAuthenticated} setUser={setUser} />} />
             <Route
               path="/"
-              element={isAuthenticated ? <ScholarshipFinder /> : <Navigate to="/login" />}
+              element={isAuthenticated ? <ScholarshipFinder /> : <Login setIsAuthenticated={setIsAuthenticated} setUser={setUser} />}
             />
             <Route
               path="/scholarship/:id"
